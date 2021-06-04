@@ -53,31 +53,30 @@ user@machine:~$ source activate neuromancer
 
 TODO: add arxiv link
 
-![methodology.](figs/methodology.png)
+![methodology.](train_double_integrator/paper_plots/DPC_abstract.png)  
 *Conceptual methodology.*
 
-![cl_trajectories.](train_double_integrator/paper_plots/closed_loop_dpc.pdf)
+
+![methodology.](train_double_integrator/paper_plots/deep_MPC_var2.png)  
+*Structural equivalence of DPC architecture with MPC constraints.*
+
+![cl_trajectories.](train_double_integrator/paper_plots/closed_loop_dpc.png)  
 *Closed-loop trajectories of learned constrained neural control policy using DPC.*
 
-![loss.](train_double_integrator/paper_plots/loss.pdf)
-*Loss landscape of DPC.*
 
-![contract.](train_double_integrator/paper_plots/contraction_regions.pdf)
-*Contraction regions of closed-loop system controlled with learned DPC policy.*
-
-![dpc_policy.](train_double_integrator/paper_plots/dpc_policy.pdf)
+![dpc_policy.](train_double_integrator/paper_plots/dpc_policy.png)  
 *Learned DPC policy.*
 
-![empc_policy.](train_double_integrator/paper_plots/empc_policy.pdf)
+![empc_policy.](train_double_integrator/paper_plots/empc_policy.png)  
 *Computed explicit MPC policy.*
 
 
 #### Run experiments
 
 Train DPC using Neuromancer:  
-[neuromancer_dpc](train_double_integrator/double_integrator_DPC.py)
+[neuromancer_dpc](train_double_integrator/double_integrator_DPC.py)  
 Run benchmark explicit MPC in Matlab using Yalmip:  
-[matlab_empc](train_double_integrator/double_integrator_eMPC.m)
+[matlab_empc](train_double_integrator/double_integrator_eMPC.m)  
 
 #### Cite as
 
