@@ -40,7 +40,7 @@ def arg_dpc_problem(prefix=''):
     """
     parser = arg.ArgParser(prefix=prefix, add_help=False)
     gp = parser.group("DPC")
-    gp.add("-nsteps", type=int, default=2,
+    gp.add("-nsteps", type=int, default=1,
            help="prediction horizon.")          # tuned values: 1, 2
     gp.add("-Qx", type=float, default=5.0,
            help="state weight.")                # tuned value: 5.0
