@@ -1,79 +1,111 @@
-# NeuroMANCER
-## Neural Modules with Adaptive Nonlinear Constraints and 	Efficient Regularizations
+# Differentiable Predictive Control 
+Examples of the differentiable predictive control (DPC) policy optimization algorithm presented in the paper "Learning Constrained Adaptive Differentiable Predictive Control Policies With Guarantees"
+https://arxiv.org/abs/2004.11184
 
-## [Complete Documentation](https://pnnl.github.io/neuromancer/)
-![UML diagram](figs/class_diagram.png)
+DPC combines the principles of model predictive control, reinforcement learning, and differentiable programming to offer a systematic way for offline unsupervised model-based policy optimization with goal-parametrized domain-aware intrinsic rewards.
 
-## Setup
 
-##### Clone and install neuromancer, linear maps, and emulator submodules 
-```console
+## Method and Examples
 
-user@machine:~$ mkdir ecosystem; cd ecosystem
-user@machine:~$ git clone https://github.com/pnnl/neuromancer.git
-user@machine:~$ git clone https://github.com/pnnl/psl.git
-user@machine:~$ git clone https://github.com/pnnl/slim.git
+![methodology.](examples/control_ODE/Example_1/test_control/DPC_abstract.png)  
+*Conceptual methodology. Simulation of the differentiable closed-loop system dynamics in the forward pass is followed by backward pass computing direct policy gradients for policy optimization *
 
-# Resulting file structure:
-    ecosystem/
-        neuromancer/
-        psl/
-        slim/
-```
+![methodology_2.](examples/control_ODE/Example_1/test_control/deep_MPC_var2.png)  
+*Structural equivalence of DPC architecture with MPC constraints.*
 
-##### Create the environment via .yml (Linux)
+![cl_trajectories.](examples/control_ODE/Example_1/test_control/cl_animation.gif)  
+*Example 1: Closed-loop trajectories of learned stabilizing neural control policy using DPC policy optimization.*
 
-```console
-user@machine:~$ conda env create -f env.yml
-(neuromancer) user@machine:~$ source activate neuromancer
-```
+![cl_trajectories_2.](examples/control_ODE/Example_1/test_control/closed%20loop%20policy%20training.gif)  
+*Example 1: Evolution of the closed-loop trajectories and DPC neural policy during training.*
 
-##### If .yml env creation fails create the environment manually
+![dpc_policy.](examples/control_ODE/Example_1/test_control/policies_surfaces.png)  
+*Example 1: Landscapes of the learned neural policy via DPC policy optimization algorithm (right) and explicit MPC policy computed using parametric programming solver (left).*
 
-```console
-user@machine:~$ conda config --add channels conda-forge pytorch
-user@machine:~$ conda creatcd e -n neuromancer python=3.7
-user@machine:~$ source activate neuromancer
-(neuromancer) user@machine:~$ conda install pytorch torchvision -c pytorch
-(neuromancer) user@machine:~$ conda install scipy pandas matplotlib control pyts numba scikit-learn dill
-(neuromancer) user@machine:~$ conda install mlflow boto3
-(neuromancer) user@machine:~$ conda install -c powerai gym
-(neuromancer) user@machine:~$ conda install pytest hypothesis
-(neuromancer) user@machine:~$ conda install -c coecms celluloid
+![example_2_dpc.](examples/control_ODE/Example_2/figs/pvtol_dpc_cl1.png)  
+*Example 2: Closed-loop control trajectories for the PVTOL aircraft model controlled by DPC neural policy.*
 
-```
+![example_2_ampc.](examples/control_ODE/Example_2/figs/ampc_1.png)  
+*Example 2: Closed-loop control trajectories for the PVTOL aircraft model controlled by approximate MPC neural policy.*
 
-##### Install neuromancer ecosystem
+![example_3.](examples/control_ODE/Example_3/figs/quadcopter_dpc_1.png)  
+*Example 3: Closed-loop reference tracking control trajectories for the quadcopter model controlled by DPC neural policy.*
 
-```console
-(neuromancer) user@machine:~$ cd psl
-(neuromancer) user@machine:~$ python setup.py develop
-(neuromancer) user@machine:~$ cd ../slim
-(neuromancer) user@machine:~$ python setup.py develop
-(neuromancer) user@machine:~$ cd ../ # into neuromancer
-(neuromancer) user@machine:~$ python setup.py develop
-```
+![example_4.](examples/control_ODE/Example_4/figs/obstacle_avoidance.PNG)  
+*Example 4: Obstacle avoidance with nonlinear constraints via learned DPC neural policy compared to online IPOPT solution.*
 
-## Examples
-Several tutorials and examples using Neuromancer to solve different parameteric programming problems
-can be found in the examples folder. 
-
-## Publications
-+ Drgoňa, J., Tuor, A. R., Chandan, V., & Vrabie, D. L. (2021). Physics-constrained deep learning of multi-zone building thermal dynamics. Energy and Buildings, 243, 110992.
-+ Tuor, A., Drgona, J., & Vrabie, D. (2020). Constrained neural ordinary differential equations with stability guarantees. arXiv preprint arXiv:2004.10883.
-+ Drgona, Jan, et al. "Differentiable Predictive Control: An MPC Alternative for Unknown Nonlinear Systems using Constrained Deep Learning." arXiv preprint arXiv:2011.03699 (2020).
-+ E. Skomski, S. Vasisht, C. Wight, A. Tuor, J. Drgoňa and D. Vrabie, "Constrained Block Nonlinear Neural Dynamical Models," 2021 American Control Conference (ACC), 2021, pp. 3993-4000, doi: 10.23919/ACC50511.2021.9482930.
-+ Skomski, E., Drgoňa, J., & Tuor, A. (2021, May). Automating Discovery of Physics-Informed Neural State Space Models via Learning and Evolution. In Learning for Dynamics and Control (pp. 980-991). PMLR.
-+ Drgoňa, J., Tuor, A., Skomski, E., Vasisht, S., & Vrabie, D. (2021). Deep Learning Explicit Differentiable Predictive Control Laws for Buildings. IFAC-PapersOnLine, 54(6), 14-19.
-+ Drgona, J., Skomski, E., Vasisht, S., Tuor, A., & Vrabie, D. (2020). Spectral Analysis and Stability of Deep Neural Dynamics. arXiv preprint arXiv:2011.13492.
-+ Drgona, J., Tuor, A., & Vrabie, D. (2020). Constrained physics-informed deep learning for stable system identification and control of unknown linear systems. arXiv preprint arXiv:2004.11184.
+![example_5.](examples/control_ODE/Example_5/figs/DeepMPC_simSysID_on_paper.png)  
+*Example 5: Closed-loop trajectories of learned stabilizing neural control policy for a stochastic system using SP-DPC policy optimization.*
 
 ## Cite as
+
 ```yaml
-@article{Neuromancer2022,
-  title={{NeuroMANCER: Neural Modules with Adaptive Nonlinear Constraints and Efficient Regularizations}},
-  author={Tuor, Aaron and Drgona, Jan and Skomski, Mia},
-  Url= {https://github.com/pnnl/neuromancer}, 
-  year={2022}
+@misc{drgona2022_DPC,
+      title={Learning Constrained Adaptive Differentiable Predictive Control Policies With Guarantees}, 
+      author={Jan Drgona and Aaron Tuor and Draguna Vrabie},
+      year={2022},
+      eprint={2004.11184},
+      archivePrefix={arXiv},
+      primaryClass={eess.SY}
 }
 ```
+
+
+# Stochastic Differentiable Predictive Control 
+Examples of the stochastic parametric differentiable predictive control (SP-DPC) policy optimization 
+algorithm presented in the paper "Learning Stochastic Parametric Differentiable Predictive Control Policies"
+https://arxiv.org/abs/2203.01447
+
+![example_6.](examples/control_ODE/SDPC_Examples/figs/closed_loop_sdpc.png)  
+*Example 6: Adaptive DPC of unknown linear system subject to disturbances.*
+
+![example_7.](examples/control_ODE/SDPC_Examples/figs/quadcopter_sdpc_psim30k_wsim3_sigma002.png)  
+*Example 7: Closed-loop reference tracking control trajectories for the stochastic quadcopter model controlled by SP-DPC neural policy.*
+
+![example_8.](examples/control_ODE/SDPC_Examples/figs/SDPC_avoidance.PNG)  
+*Example 8: Stochastic obstacle avoidance with parametric nonlinear constraints via learned SP-DPC neural policy compared to online IPOPT solution.*
+
+
+## Cite as
+
+```yaml
+@misc{drgona2022_SDPC,
+      title={Learning Stochastic Parametric Differentiable Predictive Control Policies}, 
+      author={Jan Drgona and Sayak Mukherjee and Aaron Tuor and Mahantesh Halappanavar and Draguna Vrabie},
+      year={2022},
+      eprint={2203.01447},
+      archivePrefix={arXiv},
+      primaryClass={eess.SY}
+}
+```
+
+## Files for Running the DPC and SDPC Examples
+
+### Differentiable Predictive Control Example 1 
+- double_integrator_DPC.py - DPC stabilization double integrator example 
+- double_integrator_eMPC.m - explicit MPC benchmark using MPT3 toolbox
+
+### Differentiable Predictive Control Example 2
+- vtol_aircraft_DPC_stabilize.py - Unsupervised DPC policy optimization for VTOL aircraft model 
+- vtol_aircraft_aMPC.py - Approximate MPC supervised by online MPC solver
+- pvtol_aircraft_iMPC.m - Online MPC solved in Matlab using Yalmip toolbox and quadprog solver
+
+### Differentiable Predictive Control Example 3
+- quad_3D_linearDPC.py - Reference tracking for a quadcopter model via DPC 
+- CVXPY_linearMPC_quadcopter.py - Reference tracking for a quadcopter model online MPC using CVXPY and OSQP solver
+
+### Differentiable Predictive Control Example 4
+- 2D_obstacle_avoidance_DPC.py - Parametric obstacle avoidance with nonlinear constraints via DPC 
+- 2D_obstacle_avoidance_csadi.py - Online obstacle avoidance using CasADi and IPOPT solver
+
+### Differentiable Predictive Control Example 5
+- DeepMPC_sysID_ctrl_sec_2_4.py - policy optimization with ground truth model 
+- DeepMPC_sysID_ctrl_sec_2_5.py - adaptive policy optimization via online simultaneous system ID and policy updates 
+- DeepMPC_sysID_ctrl_sec_3_7 	- computational aspects and scalability analysis
+
+### Stohastic Differentiable Predictive Control Examples 6, 7, 8
+- double_integrator_SDPC.py - stochastic DPC stabilization double integrator
+- quad_3D_linearSDPC 	- Reference tracking for a quadcopter model via stochastic DPC 
+- 2D_obstacle_avoidance_SDPC.py - stochastic parametric obstacle avoidance with nonlinear constraints via DPC 
+
+
